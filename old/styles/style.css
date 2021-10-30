@@ -1,0 +1,52 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;800&display=swap");
+ */
+
+/* body { */
+    /* padding: 0;
+    text-align: center; */
+    /* width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-intro {
+    float: left;
+    padding: 0% 10%;
+}
+
+.game-intro p {
+    font-size: 18px;
+    font-family: "Raleway"
+}
+
+body button {
+    font-family: "Raleway";
+    font-size: 30px;
+    font-weight: 600;
+    background-color: #870007;
+    color: rgb(0, 0, 150);
+    padding: 20px 40px;
+    border: 0;
+    border-radius: 25px;
+    margin: 20px;
+}
+
+.logo-img {
+    width: 350px;
+    margin: 50px
+}
+
+.arrows-img {
+    width: 150px;
+} */
+
+#game-board {
+    /* float: left; */
+    /* padding: 300px 300px; */
+}
+
+#main {
+    border: 2px solid black;
+;}
