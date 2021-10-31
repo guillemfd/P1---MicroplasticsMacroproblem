@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d')
 canvas.width = 800;
 canvas.height = 500;
 
-let score = 0;
+let score = 100;
 
 
 
@@ -12,7 +12,6 @@ const loadedImages = {}
 const imageLinks = [ //Array de objetos con los enlaces (y los nombres para identificarlos) de todas mis imagenes
   {link: "./img/peix_transp_dreta.png", name: 'fish_right'},
   {link: "./img/bubble.png", name: 'bubble'},
-  // {link: "./images/apple.png", name: 'apple'},
 ]
 
 let counterForLoadedImages = 0;
@@ -58,30 +57,55 @@ class Fish {
 const fish = new Fish()
 
 
+
 //BUBBLES
-ctx.fillStyle = 'blue'
 
 class Bubble {
   constructor(){
-    // this.eaten = false;
-    this.x = Math.random() * canvas.width -50;
+    this.eaten = false;
+    this.x = Math.random() * canvas.width;
     this.y = 600; 
     this.width = 50;
     this.height = 50;
-    this.speed = Math.random() * 5;
+    this.speed = Math.random() * 5;  //no funciona velocidad random
   }
+
+  drawBubble(){
+    ctx.drawImage(loadedImages.bubble, this.x, this.y, this.width, this.height)
+  }
+
+  checkForEatenBubbles(){
+
+   const bothInX = (this.x - 50) < fish.x && this.x > fish.x
+   const bothInY = (this.y - 50) < fish.y && this.y > fish.y
+  
+    if( bothInX && bothInY ){ 
+      console.log('colision') //////////////////////////
+      // appleSound.play()
+      this.eaten = true
+      score++;
+      document.getElementById('score').innerText = score
+    }
+  }  
 }
 
-const bubblesArray = []
+let bubblesArray = []
 
 const createBubbles = setInterval(()=>{
   bubblesArray.push(new Bubble())
 }, 2000)
 
+
 const updateBubbles = ()=>{
   bubblesArray.forEach((bubble)=>{
     bubble.speed = 3
     bubble.y -= bubble.speed
+  })
+}
+
+const checkForEatenBubbles = ()=>{
+  bubblesArray.forEach((bubble)=>{
+    bubble.checkForEatenBubblee()
   })
 }
 
@@ -91,36 +115,11 @@ const drawBubbles = ()=>{
   })
 }
 
-
-
-
-
-// --------------------- WORK IN PROGREES AREA -----------------------
-
-// checkForEatenBubbles(){
-
-//   const bothInX = (this.x - 50) < fish.x && this.x > fish.x
-//   const bothInY = (this.y - 50) < fish.y && this.y > fish.y
-  
-//   if( bothInX && bothInY ){ 
-//     // appleSound.play()
-//     this.eaten = true
-//     score++;
-//     document.getElementById('score').innerText = score
-//   }
-// }
-
-// const checkForEatenBubbles = ()=>{
-//   bubblesArray.forEach((bubble)=>{
-//     bubble.checkForEatenBubblee()
-//   })
-// }
-
-// const deleteBubble = ()=>{
-//   bubblesArray = bubblesArray.filter((bubble)=>{
-//     return !bubble.eaten
-//   })
-// }
+const deleteBubble = ()=>{
+  bubblesArray = bubblesArray.filter((bubble)=>{
+    return !bubble.eaten
+  })
+}
 
 // --------------------- WORK IN PROGREES AREA -----------------------
 
@@ -218,9 +217,9 @@ const updateCanvas = ()=>{
     clearCanvas()
 
     updateFish()
-    drawFish()
-    
     updateBubbles()
+
+    drawFish()
     drawBubbles()
   }
   requestAnimationFrame(updateCanvas) //Activa un loop infinito. Este loop va a la velocidad de la tasa de refresco de la pantalla en la que se está viendo el juego. Le vamos a pasar como argumento la función donde estamos llamando al requestAnimationFrame (en este caso, updateCanvas)
