@@ -60,7 +60,7 @@ function inint() {
 }
 
 
-//ANIMACIÓN
+//BACKGROUND 
 function animate () {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, innerWidth, innerHeight);

@@ -1,9 +1,7 @@
 const canvas = document.getElementById('main')
 const ctx = canvas.getContext('2d')
-canvas.width = 800;
-canvas.height = 500;
-
-let score = 100;
+canvas.width = 1000;
+canvas.height = 600;
 
 
 
@@ -42,6 +40,68 @@ imageLinks.forEach((imagen)=>{
 
 
 
+
+// -------------------------------- MICROPLÁSTICOS ------------------------------
+
+let microplasticosArray;
+
+
+//CREADOR DE MICROPLÁSTICOS
+function Microplastico (x, y, directionX, directionY, size, color) {
+    this.x = x;
+    this.y = y;
+    this.directionX = directionX;
+    this.directionY = directionY;
+    this.size = size;
+    this.color = color;
+}
+
+
+//PINTANDO MICROPLÁSTICOS
+Microplastico.prototype.draw = function () {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+}
+
+
+//UPDATING MICROPLASTICOS
+Microplastico.prototype.update = function () {
+    if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+        this.directionX = -this.directionX;
+    }
+    if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+        this.directionY = -this.directionY;
+    }
+    this.x += this.directionX;
+    this.y += this.directionY;
+
+    this.draw();
+}
+
+
+//ARRAY DE MICROPLÁSTICOS
+function inint() {
+    microplasticosArray = [];
+    for (let i = 0; i < 4000; i++) {
+        let size = Math.random() * 2.5;
+        let x = Math.random() * (innerWidth - size * 2);
+        let y =Math.random() * (innerHeight - size * 2);
+        let directionX = (Math.random() * .4) - .2;
+        let directionY = (Math.random() * .4) - .2;
+        let color = '#5a0101';
+
+        microplasticosArray.push(new Microplastico(x, y, directionX, directionY, size, color));
+    }
+}
+
+// -------------------------------- MICROPLÁSTICOS ------------------------------
+
+
+
+
+
 //CLASSES
 class Fish {
   constructor(){
@@ -64,30 +124,34 @@ class Bubble {
   constructor(){
     this.eaten = false;
     this.x = Math.random() * canvas.width;
-    this.y = 600; 
-    this.width = 50;
-    this.height = 50;
-    this.speed = Math.random() * 5;  //no funciona velocidad random
+    this.y = 700; 
+    this.width = 90;
+    this.height = 80;
+    this.speed = Math.floor(Math.random() * 5 +1);  //no funciona velocidad random
   }
 
   drawBubble(){
     ctx.drawImage(loadedImages.bubble, this.x, this.y, this.width, this.height)
   }
 
-  checkForEatenBubbles(){
 
-   const bothInX = (this.x - 50) < fish.x && this.x > fish.x
-   const bothInY = (this.y - 50) < fish.y && this.y > fish.y
+  //---------------------------------------- COLISIÓN OPCIÓN JJ ------------
+  checkForEatenBubbles(){
+    console.log('kkk')
+   const bothInX = (this.x - 90) < fish.x && this.x +30 > fish.x
+   const bothInY = (this.y - 70) < fish.y && this.y > fish.y
   
     if( bothInX && bothInY ){ 
-      console.log('colision') //////////////////////////
+      console.log('colision') //////////////////////////------------------------
       // appleSound.play()
       this.eaten = true
       score++;
       document.getElementById('score').innerText = score
     }
-  }  
+  }
 }
+
+
 
 let bubblesArray = []
 
@@ -105,7 +169,7 @@ const updateBubbles = ()=>{
 
 const checkForEatenBubbles = ()=>{
   bubblesArray.forEach((bubble)=>{
-    bubble.checkForEatenBubblee()
+    bubble.checkForEatenBubbles()
   })
 }
 
@@ -117,13 +181,14 @@ const drawBubbles = ()=>{
 
 const deleteBubble = ()=>{
   bubblesArray = bubblesArray.filter((bubble)=>{
+    // console.log('DELETE', bubble.eaten)
     return !bubble.eaten
   })
 }
 
+
+
 // --------------------- WORK IN PROGREES AREA -----------------------
-
-
 
 //EVENT LISTENERS
 
@@ -146,6 +211,10 @@ const deleteBubble = ()=>{
 // }
 
 // createApples()---------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 //FISH MOVEMENTS
 document.addEventListener('keydown', (event)=>{
@@ -175,8 +244,8 @@ const drawFish = ()=>{
 }
 
 const checkIfInBounds = ()=>{
-  if(fish.x > 700){
-    fish.x = 700
+  if(fish.x > 900){
+    fish.x = 900
   }
 
   if(fish.x < 0){
@@ -187,8 +256,8 @@ const checkIfInBounds = ()=>{
     fish.y = 0
   }
 
-  if(fish.y > 400){
-    fish.y = 400
+  if(fish.y > 500){
+    fish.y = 500
   }
 }
 
@@ -199,7 +268,7 @@ const updateFish = ()=>{
 }
 
 const clearCanvas = ()=>{
-  ctx.clearRect(0, 0, 900, 600)
+  ctx.clearRect(0, 0, 1100, 700)
 }
 
 // --------------------- WORK IN PROGREES AREA -----------------------
@@ -211,6 +280,52 @@ const clearCanvas = ()=>{
 // --------------------- WORK IN PROGREES AREA -----------------------
 
 
+
+  // ------------------------------ TIME -----------------------------------------
+  let time = 3000
+  const interval = setInterval(() => {
+    if(time > 0){
+      time --;
+    }else{
+      clearInterval(interval);
+      //alert(`You have been polluted! \nYou catch ${score} bubbles`)
+      window.location.href = `../html/polluted.html?score=${score}`
+    }
+  }, 1000)
+
+  const drawtime = (number) =>{
+    ctx.font = "25px arial"; 
+    ctx.fillStyle = "blue"
+    ctx.fillText(`Remaining life time :${number}`, 25, 30)
+  }
+  // ------------------------------ TIME -----------------------------------------
+
+
+
+  // ------------------------------ Score -----------------------------------------
+  let score = 0
+  const drawscore = (number) =>{
+    ctx.font = "25 arial"
+    ctx.fillStyle = "blue"
+    ctx.fillText(`Eaten bubbles:${number}`, 350, 30)
+  }
+  // ------------------------------ Score -----------------------------------------
+
+
+
+
+
+//BACKGROUND 
+function animate () {
+  requestAnimationFrame(animate);
+  
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  
+}
+animate()
+inint()
+
+
 //RUNNING GAME
 const updateCanvas = ()=>{ 
   if(imageLinks.length === counterForLoadedImages){
@@ -219,10 +334,20 @@ const updateCanvas = ()=>{
     updateFish()
     updateBubbles()
 
+    deleteBubble()
+    checkForEatenBubbles()
+
+
+
     drawFish()
     drawBubbles()
+
+    drawtime(time)
+    drawscore(score)
   }
   requestAnimationFrame(updateCanvas) //Activa un loop infinito. Este loop va a la velocidad de la tasa de refresco de la pantalla en la que se está viendo el juego. Le vamos a pasar como argumento la función donde estamos llamando al requestAnimationFrame (en este caso, updateCanvas)
+  for (let i = 0; i < microplasticosArray.length; i++) {
+    microplasticosArray[i].update()
+  }
 }
-
 updateCanvas()
