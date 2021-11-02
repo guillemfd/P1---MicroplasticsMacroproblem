@@ -8,8 +8,8 @@ canvas.height = 600;
 const loadedImages = {}
 
 const imageLinks = [ //Array de objetos con los enlaces (y los nombres para identificarlos) de todas mis imagenes
-  {link: "./img/peix_transp_dreta.png", name: 'fish_right'},
-  {link: "./img/bubble.png", name: 'bubble'},
+  {link: "../img/peix_transp_dreta.png", name: 'fish_right'},
+  {link: "../img/bubble.png", name: 'bubble'},
 ]
 
 let counterForLoadedImages = 0;
@@ -138,15 +138,15 @@ class Bubble {
   //---------------------------------------- COLISIÓN OPCIÓN JJ ------------
   checkForEatenBubbles(){
     console.log('kkk')
-   const bothInX = (this.x - 90) < fish.x && this.x +30 > fish.x
+   const bothInX = (this.x - 90) < fish.x && this.x +50 > fish.x
    const bothInY = (this.y - 70) < fish.y && this.y > fish.y
   
     if( bothInX && bothInY ){ 
-      console.log('colision') //////////////////////////------------------------
+      // console.log('colision') 
       // appleSound.play()
       this.eaten = true
       score++;
-      document.getElementById('score').innerText = score
+      // document.getElementById('score').innerText = score
     }
   }
 }
@@ -282,14 +282,14 @@ const clearCanvas = ()=>{
 
 
   // ------------------------------ TIME -----------------------------------------
-  let time = 3000
+  let time = 5
   const interval = setInterval(() => {
     if(time > 0){
       time --;
     }else{
       clearInterval(interval);
       //alert(`You have been polluted! \nYou catch ${score} bubbles`)
-      window.location.href = `../html/polluted.html?score=${score}`
+      window.location.href = `./polluted.html?score=${score}`
     }
   }, 1000)
 
