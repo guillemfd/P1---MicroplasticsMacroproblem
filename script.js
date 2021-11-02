@@ -320,7 +320,7 @@ const clearCanvas = ()=>{
 
 
   // ------------------------------ TIME -----------------------------------------
-  let time = 25
+  let time = 5
   const interval = setInterval(() => {
     if(time > 0){
       time --;
@@ -328,12 +328,16 @@ const clearCanvas = ()=>{
       clearInterval(interval);
       //alert(`You have been polluted! \nYou catch ${score} bubbles`)
       window.location.href = `./polluted.html?score=${score}`
+      const queryString = window.location.search
+      // document.querySelector('.move').innerText=`You achived to catch ${score} bubbles!`
     }
   }, 1000)
 
-  const drawtime = (number) =>{
-    ctx.font = "25px arial"; 
-    ctx.fillStyle = "blue"
+  //You achived to catch ${score} bubbles!
+
+  const drawtime = (number) => {
+    ctx.font = "25px Montserrat";
+    ctx.fillStyle = "#003eaa"
     ctx.fillText(`Remaining life time :${number}`, 25, 30)
   }
   // ------------------------------ TIME -----------------------------------------
