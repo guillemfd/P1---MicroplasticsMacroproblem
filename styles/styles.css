@@ -18,8 +18,8 @@ body {
   background-position: bottom;
   font-family: 'Montserrat';
   /* display: flex; */
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
 }
 
 .bubbles {
@@ -36,13 +36,13 @@ body {
 
 
 canvas {
-  font-family: 'Montserrat'
-  border: 1px solid #000000;
+  font-family: 'Montserrat';
+  border: 5px solid rgba(255, 255, 255, 0.5);
   position: absolute;
-  background: linear-gradient(#d5e7ff, #003eaa); */
+  background: linear-gradient(#d5e7ff, #003eaa);
   /* color: rgb(100, 100, 100); */
   padding: 0;
-  margin: 100px auto;
+  margin: 220px auto;
   display: block;
   position: absolute;
   top: 0;
@@ -136,5 +136,38 @@ canvas {
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 .btn:hover {
+  box-shadow: 0 0 40px 40px red inset;
+}
+
+
+/* ---------- BOTÓ MÚSICA ------------- */
+#muteButton{
+  height: 800px;
+  width: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/* ---------- BOTÓ MÚSICA ------------- */
+
+.congrats {
+  margin-top: 50px;
+  font-size: 4em;
+}
+
+.btn_back {
+  margin-top: 25px;
+  padding-top: 5px;  
+  background-color: transparent;
+  border: 5px solid red;
+  opacity: 0.8;
+  font-weight: bold;
+  font-size: 2em;
+  width: 600px;
+  height: 70px;
+  /* height: 150px; */
+  border-radius: 50px;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+.btn_back:hover {
   box-shadow: 0 0 40px 40px red inset;
 }

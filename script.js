@@ -123,7 +123,7 @@ const fish = new Fish()
 class Bubble {
   constructor(){
     this.eaten = false;
-    this.x = Math.random() * canvas.width;
+    this.x = Math.random() * canvas.width -50;
     this.y = 700; 
     this.width = 90;
     this.height = 80;
@@ -137,19 +137,92 @@ class Bubble {
 
   //---------------------------------------- COLISIÓN OPCIÓN JJ ------------
   checkForEatenBubbles(){
-    console.log('kkk')
    const bothInX = (this.x - 90) < fish.x && this.x +50 > fish.x
    const bothInY = (this.y - 70) < fish.y && this.y > fish.y
   
     if( bothInX && bothInY ){ 
-      // console.log('colision') 
-      // appleSound.play()
       this.eaten = true
       score++;
+      bubbleSound.play()
       // document.getElementById('score').innerText = score
     }
   }
 }
+
+//-------------------------- SONIDOS --------------------------
+let bubbleSound = new Audio('../sounds/bubble_sound.wav')
+    bubbleSound.volume = 1
+    bubbleSound.preload = 'auto'
+    bubbleSound.load()
+
+let soundtrack = new Audio('../sounds/soundtrack.wav')
+    soundtrack.volume = 1
+    soundtrack.preload = 'auto'
+    soundtrack.load()
+
+
+//--- MUSIC JUAGO JJ -----------
+
+// let soundtrack = false;
+// let musicActivated = true;
+
+
+// const loadAudio = () => {
+//   const sound = new Audio("./sounds/kimetsu-song.mp3");
+//   sound.preload = "auto";
+//   sound.load();
+//   audio = sound;
+// };
+
+
+// let eventCounter = 0;
+// document.querySelector(".switch").addEventListener("click", (event) => {
+//   eventCounter++;
+//   if (eventCounter === 2) {
+//     if (musicActivated) {
+//       soundtrack.pause();
+//     } else {
+//       soundtrack.play();
+//     }
+//     musicActivated = !musicActivated;
+//     eventCounter = 0;
+//   }
+// });
+
+// document.getElementById("start-game").addEventListener("click", () => {
+//   soundtrack.play();
+// });
+
+
+// ----  AQUÍ UN INTENTO DE ON/OFF MUSIC -------    
+// let muteButton = document.getElementById('muteButton');
+// muteButton.addEventListener('click', muteOrUnmute, false);
+
+// function muteOrUnmute (){
+//   if(soundtrack.muted == true){
+//     soundtrack.muted = false;
+//     muteButton.style.backgroundImage = 'url(../sounds/sound_on.png)';
+//   } else {
+//     soundtrack.muted = true;
+//     muteButton.style.backgroundImage = 'url(../sounds/sound_off.png)';
+//   }
+// }
+
+
+
+//     var un_mute = document.getElementById('un-mute');
+
+//     un_mute.onclick = function() {  
+//       if (soundtrack.muted) {
+//     soundtrack.pause();
+//   } else {
+//     soundtrack.play();
+//   };
+// }
+//-------------------------- SONIDOS --------------------------
+
+
+
 
 
 
@@ -185,32 +258,6 @@ const deleteBubble = ()=>{
     return !bubble.eaten
   })
 }
-
-
-
-// --------------------- WORK IN PROGREES AREA -----------------------
-
-//EVENT LISTENERS
-
-// let appleSound = ''
-
-// window.addEventListener('load', ()=>{
-//   appleSound = new Audio('./sounds/apple-bite.mp3')
-//   appleSound.preload = 'auto'
-//   appleSound.load()
-// })
-// 
-
-// let arrayOfApples = []
-
-// const createApples = ()=>{
-//   for(let i = 0; i < 5; i++){
-//     const apple = new Apple()
-//     arrayOfApples.push(apple)
-//   }
-// }
-
-// createApples()---------------------------------------------------------------------------------------------------------------
 
 
 
@@ -271,18 +318,9 @@ const clearCanvas = ()=>{
   ctx.clearRect(0, 0, 1100, 700)
 }
 
-// --------------------- WORK IN PROGREES AREA -----------------------
-
-// const updateBubbles = ()=>{
-//   deleteBubble()
-//   checkForEatenBubbles()
-// }
-// --------------------- WORK IN PROGREES AREA -----------------------
-
-
 
   // ------------------------------ TIME -----------------------------------------
-  let time = 5
+  let time = 25
   const interval = setInterval(() => {
     if(time > 0){
       time --;
@@ -337,7 +375,7 @@ const updateCanvas = ()=>{
     deleteBubble()
     checkForEatenBubbles()
 
-
+    soundtrack.play()
 
     drawFish()
     drawBubbles()
