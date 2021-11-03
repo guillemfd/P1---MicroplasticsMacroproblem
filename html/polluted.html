@@ -18,28 +18,17 @@
 </head>
 <body>
 
-    <!-- <style type="text/css">
-        html { 
-          background: url(../img/background.jpg) no-repeat center center fixed; 
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
-    </style> -->
-
   <img class="logo" src="../img/logo_transp.png" alt="logoMM">
 
     <div id="container">
 
       <div id="cover-white">
-
         
         <p class="congrats">GOD JOB!</p>
 
-        <!-- <p class="move">You achived to catch ${score} bubbles!</p> -->
-        <p class="move"> But you have been polluted anyway...</p>
+        <p class="move">You achived to catch <span id="score"></span> bubbles!</p>
 
+        <p class="move"> But you have been polluted anyway...</p>
 
         <div class="line"></div>
 
@@ -47,15 +36,22 @@
 
         <a href="./index.html" class="btn_back">Back to beginning</a>
 
-
       </div>
 
       <h2 class="more-info"><a href="https://oceanservice.noaa.gov/facts/microplastics.html" target="_blank">Do you want to know more about microplastics?</a></h2>
 
     </div>
 
+  <script>
 
-  <script src="../index.js"></script>
+    const queryString = window.location.search;  // = ?score=1
+
+    const urlParams = new URLSearchParams(queryString);
+
+    const urlScore = urlParams.get('score')
+
+    document.querySelector('#score').innerText = urlScore 
+   </script>
   
 
 </body>

@@ -56,7 +56,6 @@ canvas {
   padding: 0;
   margin: 220px auto;
   display: block;
-  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -74,10 +73,6 @@ canvas {
   top: 0px;
   position: fixed;
 }
-
-/* #container {
-  position: fixed;
-} */
 
 #cover-white {
   margin: 12.5% auto;
@@ -99,6 +94,7 @@ canvas {
   padding: 0px 25px;
   align-items: center;
   text-align: center;
+  line-height: 1.2em;;
 }
 
 .line{
@@ -138,7 +134,7 @@ canvas {
 
 .btn {
   background-color: transparent;
-  border: 5px solid red;
+  border: 5px solid #ff0000;
   opacity: 0.8;
   font-weight: bold;
   font-size: 2em;
@@ -148,7 +144,7 @@ canvas {
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 .btn:hover {
-  box-shadow: 0 0 40px 40px red inset;
+  box-shadow: 0 0 40px 40px #ff3232 inset;
 }
 
 
@@ -170,7 +166,7 @@ canvas {
   margin-top: 25px;
   padding-top: 5px;  
   background-color: transparent;
-  border: 5px solid red;
+  border: 5px solid #ff0000;
   opacity: 0.8;
   font-weight: bold;
   font-size: 2em;
@@ -181,5 +177,17 @@ canvas {
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 .btn_back:hover {
-  box-shadow: 0 0 40px 40px red inset;
+  box-shadow: 0 0 40px 40px #ff3232 inset;
+}
+
+#pPButton {
+  border: none;
+  height: 100px;
+  width: 100px;
+  background-image: url(../sounds/sound_on.png);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 50px;
+  right: 50px;
 }
