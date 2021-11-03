@@ -6,14 +6,11 @@ if(canvas !== null){
   canvas.width = 1000;
   canvas.height = 600;
 }
- 
-
 
 
 let score = 0
 
-
-
+//------- CARGANDO IMÁGENES -----------------------------
 const loadedImages = {}
 
 const imageLinks = [ //Array de objetos con los enlaces (y los nombres para identificarlos) de todas mis imagenes
@@ -35,14 +32,13 @@ imageLinks.forEach((imagen)=>{
     }
   }
 })
+//------- CARGANDO IMÁGENES -----------------------------
 
 
 
 
-// -------------------------------- MICROPLÁSTICOS ------------------------------
-
+// -------------------------------- BACKGROUND MICROPLÁSTICOS ------------------------------
 let microplasticosArray;
-
 
 //CREADOR DE MICROPLÁSTICOS
 function Microplastico (x, y, directionX, directionY, size, color) {
@@ -93,14 +89,11 @@ function inint() {
         microplasticosArray.push(new Microplastico(x, y, directionX, directionY, size, color));
     }
 }
-
-// -------------------------------- MICROPLÁSTICOS ------------------------------
-
+// -------------------------------- BACKGROUND MICROPLÁSTICOS ------------------------------
 
 
 
-
-//CLASSES
+//--------------- FISH ---------------------------
 class Fish {
   constructor(){
     this.x = (canvas.width/2) -50;
@@ -114,11 +107,12 @@ class Fish {
 }
 
 const fish = new Fish()
+//--------------- FISH ---------------------------
 
 
 
-//BUBBLES
 
+//BUBBLES---------------------------BUBBLES
 class Bubble {
   constructor(){
     this.eaten = false;
@@ -147,6 +141,11 @@ class Bubble {
     }
   }
 }
+  //---------------------------------------- COLISIÓN ------------
+//BUBBLES---------------------------BUBBLES
+
+
+
 
 //-------------------------- SONIDOS --------------------------
 let bubbleSound = new Audio('../sounds/bubble_sound.wav')
@@ -154,10 +153,6 @@ let bubbleSound = new Audio('../sounds/bubble_sound.wav')
     bubbleSound.preload = 'auto'
     bubbleSound.load()
 
-// let soundtrack = new Audio('../sounds/soundtrack.wav')
-//     soundtrack.volume = 1
-//     soundtrack.preload = 'auto'
-//     soundtrack.load()
 
 const audio = document.getElementById('audio');
 const playPauseBTN = document.getElementById('pPButton')
@@ -171,90 +166,16 @@ function playPause(){
     playPauseBTN.style.backgroundImage = 'url(../sounds/sound_on.png)';
   }
 }
-
-// var count = 0;
-
-// function playPause(){
-//   if(count == 0) {
-//     count = 1;
-//     audio.play();
-//     playPauseBTN.innerHTML = "Pause $#9208;";
-//   } else {
-//     count = 0;
-//     audio.pause();
-//     playPauseBTN.innerHTML = "Play $#9658;";
-//   }
-// }
-
-
-
-//--- MUSIC JUEGO JJ -----------
-
-// let soundtrack = false;
-// let musicActivated = true;
-
-
-// const loadAudio = () => {
-//   const sound = new Audio("./sounds/kimetsu-song.mp3");
-//   sound.preload = "auto";
-//   sound.load();
-//   audio = sound;
-// };
-
-
-// let eventCounter = 0;
-// document.querySelector(".switch").addEventListener("click", (event) => {
-//   eventCounter++;
-//   if (eventCounter === 2) {
-//     if (musicActivated) {
-//       soundtrack.pause();
-//     } else {
-//       soundtrack.play();
-//     }
-//     musicActivated = !musicActivated;
-//     eventCounter = 0;
-//   }
-// });
-
-// document.getElementById("start-game").addEventListener("click", () => {
-//   soundtrack.play();
-// });
-
-
-// ----  AQUÍ UN INTENTO DE ON/OFF MUSIC -------    
-// let muteButton = document.getElementById('muteButton');
-// muteButton.addEventListener('click', muteOrUnmute, false);
-
-// function muteOrUnmute (){
-//   if(soundtrack.muted == true){
-//     soundtrack.muted = false;
-//     muteButton.style.backgroundImage = 'url(../sounds/sound_on.png)';
-//   } else {
-//     soundtrack.muted = true;
-//     muteButton.style.backgroundImage = 'url(../sounds/sound_off.png)';
-//   }
-// }
-
-
-
-//     var un_mute = document.getElementById('un-mute');
-
-//     un_mute.onclick = function() {  
-//       if (soundtrack.muted) {
-//     soundtrack.pause();
-//   } else {
-//     soundtrack.play();
-//   };
-// }
 //-------------------------- SONIDOS --------------------------
 
 
 
+//----------------------- PINTANDO Y ACTUALIZANDO BUBBLES -----------------
 let bubblesArray = []
 
 const createBubbles = setInterval(()=>{
   bubblesArray.push(new Bubble())
-}, 2000)
+}, 750)
 
 
 const updateBubbles = ()=>{
@@ -282,10 +203,11 @@ const deleteBubble = ()=>{
     return !bubble.eaten
   })
 }
+//----------------------- PINTANDO Y ACTUALIZANDO BUBBLES -----------------
 
 
 
-//FISH MOVEMENTS
+//----------------------- FISH MOVEMENTS ---------------------------
 document.addEventListener('keydown', (event)=>{
   if(event.key === "ArrowRight"){
     fish.speedX = 5
@@ -308,10 +230,12 @@ document.addEventListener('keyup', (event)=>{
     fish.speedY = 0
   }
 })
+//----------------------- FISH MOVEMENTS ---------------------------
 
 
-//FUNCTIONS
 
+
+//----------------------- PINTANDO PECES ---------------------------
 const drawRightFish = ()=>{
   ctx.drawImage(loadedImages.fish_right, fish.x, fish.y, fish.width, fish.height)
 }
@@ -319,27 +243,10 @@ const drawRightFish = ()=>{
 const drawLeftFish = ()=>{
   ctx.drawImage(loadedImages.fish_left, fish.x, fish.y, fish.width, fish.height)
 }
-
-// drawFish(){
-//   if(event.key === "ArrowLeft"){
-//   ctx.drawImage(loadedImages.fish_left, fish.x, fish.y, fish.width, fish.height)
-//   }else{
-//   ctx.drawImage(loadedImages.fish_right, fish.x, fish.y, fish.width, fish.height)
-//   }
-// }
-
-// const drawFish = ()=>{
-//   if('ArrowLeft' === true){
-//   ctx.drawImage(loadedImages.fish_left, fish.x, fish.y, fish.width, fish.height)
-//   }else{
-//   ctx.drawImage(loadedImages.fish_right, fish.x, fish.y, fish.width, fish.height)
-//   }
-// }
+//----------------------- PINTANDO PECES ---------------------------
 
 
-
-
-
+//----------------------- ESTABLECIENDO LÍMITES DE JUEGO ---------------------------
 const checkIfInBounds = ()=>{
   if(fish.x > 900){
     fish.x = 900
@@ -363,6 +270,8 @@ const updateFish = ()=>{
   fish.y += fish.speedY
   checkIfInBounds()
 }
+//----------------------- ESTABLECIENDO LÍMITES DE JUEGO ---------------------------
+
 
 const clearCanvas = ()=>{
   ctx.clearRect(0, 0, 1100, 700)
@@ -370,38 +279,15 @@ const clearCanvas = ()=>{
 
 
 // ------------------------------ TIME -----------------------------------------
-let time = 10
+let time = 30
 const interval = setInterval(() => {
   if(time > 0){
     time --;
   }else{
     clearInterval(interval);
-    // alert(`You have been polluted! \nYou catch ${score} bubbles`)
     window.location.href = `./polluted.html?score=${score}`
-    // window.location.href = `./polluted.html`
-    //window.location.assign("./polluted.html");
-    // const queryString = window.location.search
-
-
   }
 }, 1000)
-
-
-
-//SCORE
-
-// showScores() {
-//   // show scores
-//    this.ctx.font = '25px Verdana';
-//    this.ctx.fillStyle = 'black';
-//    this.ctx.fillText('Score: ' + this.score, 20, 40);
-// },
-
-//  let scoreElement = document.getElementById("score")
-//  scoreElement.innerHTML = "Score: "+ this.score;
-
-
-//You achived to catch ${score} bubbles!
 
 const drawtime = (number) => {
   ctx.font = "25px Montserrat";
@@ -412,20 +298,19 @@ const drawtime = (number) => {
 
 
 
-// ------------------------------ Score -----------------------------------------
-
+// ------------------------------ CANVAS SCORE -----------------------------------------
 const drawscore = (number) =>{
   ctx.font = "25 arial"
   ctx.fillStyle = "#000096"
   ctx.fillText(`Eaten bubbles:${number}`, 25, 70)
 }
-// ------------------------------ Score -----------------------------------------
+// ------------------------------ CANVAS SCORE -----------------------------------------
 
 
 
 
 
-//BACKGROUND MICROPLÁSTICOS
+//------------------- FUNCIÓN BACKGROUND MICROPLÁSTICOS -------------------
 function animate () {
   requestAnimationFrame(animate);
   
@@ -434,18 +319,20 @@ function animate () {
 }
 animate()
 inint()
+//------------------- FUNCIÓN BACKGROUND MICROPLÁSTICOS -------------------
 
 
 
-//BACKGROUND ARENA
+//------------------- FUNCIÓN BACKGROUND ARENA -------------------
 const drawSand = ()=>{
   ctx.drawImage(loadedImages.sorra,  0, 210, canvas.width, 400)
 }
+//------------------- FUNCIÓN BACKGROUND ARENA -------------------
 
 
 
 
-//RUNNING GAME
+//------------------ RUNNING GAME ------------------ RUNNING GAME -------------------- RUNNING GAME -------------
 const updateCanvas = ()=>{ 
   if(imageLinks.length === counterForLoadedImages){
     clearCanvas()
@@ -462,35 +349,15 @@ const updateCanvas = ()=>{
       drawRightFish();
     }
     
-    // drawFish()
     drawBubbles()
     drawSand()
 
     drawtime(time)
     drawscore(score)
   }
-  requestAnimationFrame(updateCanvas) //Activa un loop infinito. Este loop va a la velocidad de la tasa de refresco de la pantalla en la que se está viendo el juego. Le vamos a pasar como argumento la función donde estamos llamando al requestAnimationFrame (en este caso, updateCanvas)
+  requestAnimationFrame(updateCanvas)
   for (let i = 0; i < microplasticosArray.length; i++) {
     microplasticosArray[i].update()
   }
 }
 updateCanvas()
-
-
-// window.addEventListener('onhashchange', (event) => {
-
-
-
-// });
-
-
-// document.addEventListener("DOMContentLoaded", function() {
-//   const scoreElement = document.querySelector('#score');
-//   alert();
-
-//   if(score){
-//     scoreElement.innerText = score
-//   }
- 
-// });
-
