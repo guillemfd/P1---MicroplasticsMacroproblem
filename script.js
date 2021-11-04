@@ -199,7 +199,6 @@ const drawBubbles = ()=>{
 
 const deleteBubble = ()=>{
   bubblesArray = bubblesArray.filter((bubble)=>{
-    // console.log('DELETE', bubble.eaten)
     return !bubble.eaten
   })
 }
